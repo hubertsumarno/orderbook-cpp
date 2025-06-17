@@ -5,4 +5,3 @@ int main() {
 
   // Do some operations with the orderbook
 }
-

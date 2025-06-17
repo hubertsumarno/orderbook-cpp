@@ -2,8 +2,7 @@
 
 #include "Usings.h"
 
-struct LevelInfo
-{
+struct LevelInfo {
   Price price_;
   Quantity quantity_;
 };
