@@ -7,6 +7,7 @@
 #include "OrderType.h"
 #include "Side.h"
 #include "Usings.h"
+#include "Constants.h"
 
 class Order {
  public:
@@ -18,6 +19,10 @@ class Order {
         price_{price},
         initialQuantity_{quantity},
         remainingQuantity_{quantity} {}
+
+  Order(OrderId orderId, Side side, Quantity quantity)
+      : Order(OrderType::Market, orderId, side, Constants::InvalidPrice, quantity)
+  {}
 
   OrderId GetOrderId() const { return orderId_; }
   Side GetSide() const { return side_; }
@@ -36,6 +41,14 @@ class Order {
           GetOrderId()));
 
     remainingQuantity_ -= quantity;
+  }
+  void ToGoodTillCancel(Price price) 
+  { 
+    if (GetOrderType() != OrderType::Market)
+      throw std::logic_error(std::format("Order ({}) cannot have its price adjusted, only market orders can.", GetOrderId()));
+
+    price_ = price;
+    orderType_ = OrderType::GoodTillCancel;
   }
 
  private:
