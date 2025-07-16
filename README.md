@@ -12,6 +12,7 @@ The following order types are supported:
 * FillAndKill
 * FillOrKill
 * GoodForDay
+* Market
 
 ## Code stucture
 
