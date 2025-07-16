@@ -37,6 +37,7 @@ class Orderbook {
   mutable std::mutex ordersMutex_;
   std::thread ordersPruneThread_;
   std::condition_variable shutdownConditionVariable_;
+  std::atomic<bool> shutdown_{false};
 
   void PruneGoodForDayOrders();
 
